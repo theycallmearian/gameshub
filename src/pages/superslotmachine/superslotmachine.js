@@ -1,4 +1,4 @@
-import '/src/pages/tictactoe/superslotmachine.css'
+import '/src/pages/superslotmachine/superslotmachine.css'
 
 // ---- INIT & CLEANUP ----
 export const initSuperSlotMachine = (container) => {
