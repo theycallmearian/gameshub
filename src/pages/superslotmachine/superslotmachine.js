@@ -1,3 +1,5 @@
+import '/src/pages/tictactoe/superslotmachine.css'
+
 // ---- INIT & CLEANUP ----
 export const initSuperSlotMachine = (container) => {
   const cssLink = document.createElement('link')
