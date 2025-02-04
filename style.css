@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+/* VARIABLES GLOBALES */
+
+:root {
+  /* COLORS */
+  --green: green;
+  --red: red;
+  --yellow: yellow;
+  --blue: blue;
+  --walterwhite: #ffffff;
+  --greentwo: #1bfd9c;
+
+  /* PADDING */
+  --padding-s: 0.5em;
+  --padding-m: 1em;
+  --padding-l: 2em;
+  --padding-xl: 3em;
+  --padding-xxl: 4em;
+  --padding-xxxl: 10em;
+
+  /* MARGIN */
+  --margin-s: 0.5em;
+  --margin-m: 1em;
+  --margin-l: 2em;
+  --margin-xl: 3em;
+  --margin-xxl: 4em;
+  --margin-xxxl: 10em;
+
+  /* GAP */
+
+  --gap-s: 0.5em;
+  --gap-m: 1em;
+  --gap-l: 2em;
+  --gap-xl: 3em;
+  --gap-xxl: 4em;
+  --gap-xxxl: 10em;
+
+  --borderWidth: 3px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}

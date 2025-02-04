@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+header {
+  display: flex;
+  padding: var(--padding-l);
+  justify-content: space-around;
+  align-items: center;
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(121, 9, 102, 1) 100%,
+    rgba(0, 65, 255, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(121, 9, 102, 1) 100%,
+    rgba(0, 65, 255, 1) 100%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(121, 9, 102, 1) 100%,
+    rgba(0, 65, 255, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#0041ff",GradientType=1);
+  border: linear-gradient(45deg, gold, deeppink) 1;
+  animation: huerotate 6s infinite linear;
+  filter: hue-rotate(360deg);
+}
+
+@keyframes huerotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rorate(360deg);
+  }
+}
+
+.button-container button {
+  background: #151b39;
+  color: cyan;
+  border: 2px solid cyan;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  padding: 10px 20px;
+  margin: var(--margin-s);
+  font-size: 25px;
+  font-weight: 900;
+  cursor: pointer;
+  font-family: 'Silkscreen', sans-serif;
+}
+
+.button-container button:hover {
+  border-color: magenta;
+  color: white;
+  box-shadow: 0 0.6em 0.6em -0.3em magenta;
+  transform: translateY(-0.3em);
+}
+
+@media (max-width: 500px) {
+  header button {
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 20px;
+  }
+}
+
+/* Casita STYLE */
+
+.casita button {
+  background: #151b39;
+  color: cyan;
+  border: 2px solid cyan;
+  padding: 1em 2em;
+  font-size: 1em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.casita button:hover {
+  border-color: magenta;
+  color: white;
+  box-shadow: 0 0.6em 0.6em -0.3em magenta;
+  transform: translateY(-0.3em);
+}
+
+#games-hub-title {
+  background: 50% 100%/50% 50% no-repeat
+    radial-gradient(ellipse at bottom, #fff, transparent, transparent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 10vw;
+  font-family: 'Press Start 2P', system-ui;
+  text-transform: uppercase;
+  -webkit-animation: reveal 3000ms ease-in-out forwards 200ms,
+    glow 2500ms linear infinite 2000ms;
+  animation: reveal 3000ms ease-in-out forwards 200ms,
+    glow 2500ms linear infinite 2000ms;
+  padding-bottom: var(--padding-s);
+}
+@-webkit-keyframes reveal {
+  80% {
+    letter-spacing: 8px;
+  }
+  100% {
+    background-size: 300% 300%;
+  }
+}
+@keyframes reveal {
+  80% {
+    letter-spacing: 8px;
+  }
+  100% {
+    background-size: 300% 300%;
+  }
+}
+@-webkit-keyframes glow {
+  40% {
+    text-shadow: 0 0 8px #fff;
+  }
+}
+@keyframes glow {
+  40% {
+    text-shadow: 0 0 8px #fff;
+  }
+}
+
+#games-hub-subtitle {
+  font-family: 'Silkscreen', sans-serif;
+  font-size: 3vw;
+  opacity: 0;
+  animation: fadeIn 35s forwards, blink 3s step-start infinite 2s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+main {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('https://64.media.tumblr.com/13d2c753eed929097cc13bbb1d3e482c/67441800327766fc-96/s1920x1080/fe67f6e7feaaf682aa84cd0280cbb4eed24e9dea.gif');
+}
