@@ -62,11 +62,11 @@ let scoreDisplay
 let highScoreDisplay
 
 const sounds = {
-  green: new Audio('/public/sounds/simon/green.mp3'),
-  red: new Audio('/public/sounds/simon/red.mp3'),
-  yellow: new Audio('/public/sounds/simon/yellow.mp3'),
-  blue: new Audio('/public/sounds/simon/blue.mp3'),
-  wrong: new Audio('/public/sounds/simon/wrong.mp3')
+  green: new Audio('/sounds/simon/green.mp3'),
+  red: new Audio('/sounds/simon/red.mp3'),
+  yellow: new Audio('/sounds/simon/yellow.mp3'),
+  blue: new Audio('/sounds/simon/simon/blue.mp3'),
+  wrong: new Audio('/sounds/simon/wrong.mp3')
 }
 
 function startButtonHandler() {
