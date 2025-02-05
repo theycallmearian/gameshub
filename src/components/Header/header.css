@@ -148,8 +148,9 @@ header {
 }
 
 @media (max-width: 500px) {
-  .casita button {
-    padding: 1em;
+  .casita button,
+  .button-container button {
+    padding: 0.5em;
     font-size: 25px;
   }
   header button {
