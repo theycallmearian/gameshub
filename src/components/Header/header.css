@@ -159,3 +159,11 @@ header {
     font-size: 20px;
   }
 }
+
+@media (max-width: 500px) {
+  .casita button,
+  .button-container button {
+    padding: 0.5em;
+    font-size: 15px;
+  }
+}
