@@ -1,3 +1,5 @@
+import '/src/pages/tictactoe/tictactoe.css'
+
 export const initTicTacToe = (container) => {
   const cssLink = document.createElement('link')
   cssLink.rel = 'stylesheet'
