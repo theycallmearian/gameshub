@@ -3,7 +3,7 @@
 
 header {
   display: flex;
-  padding: var(--padding-l);
+  padding: var(--padding-s);
   justify-content: space-around;
   align-items: center;
   background: -moz-linear-gradient(

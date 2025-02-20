@@ -2,7 +2,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100%;
   background-size: 1800px;
   color: var(--walterwhite);
   margin: 0;

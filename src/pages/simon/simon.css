@@ -1,7 +1,7 @@
 #simon-game-container {
   font-family: 'Silkscreen', sans-serif;
-  width: 90vw;
-  max-width: 600px;
+  width: 70vw;
+  max-width: 490px;
   padding: var(--padding-xxl);
   box-sizing: border-box;
   text-align: center;
