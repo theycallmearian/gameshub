@@ -45,7 +45,7 @@ let currentCssLink = null
 
 let homeMusic = new Audio('sounds/home-music.mp3')
 homeMusic.loop = true
-homeMusic.volume = 0.5
+homeMusic.volume = 0.1
 
 const loadGame = (game) => {
   homeMusic.pause()

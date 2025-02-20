@@ -65,7 +65,7 @@ export const Header = (headerApp) => {
   // Añadir la música de la página principal
   homeMusic = new Audio('sounds/home-music.mp3')
   homeMusic.loop = true
-  homeMusic.volume = 0.3
+  homeMusic.volume = 0.1
 
   // Reproducir la música de la página principal al cargar la página
   document.addEventListener('DOMContentLoaded', () => {
