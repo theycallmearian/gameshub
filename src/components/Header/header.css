@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
 header {
   display: flex;
   padding: var(--padding-s);
@@ -147,9 +144,67 @@ header {
   }
 }
 
-@media (max-width: 500px) {
+/* Ocultar el checkbox real */
+#musicToggle {
+  display: none;
+}
+
+/* Contenedor del toggle */
+.music-toggle-container {
+  padding: 0 var(--padding-s);
+  display: flex;
+  align-items: center;
+}
+
+/* Estilos para el toggle personalizado, similar a los botones del menú */
+.music-toggle {
+  position: relative;
+  display: inline-block;
+  background: #151b39;
+  color: cyan;
+  border: 2px solid cyan;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  padding: 10px 20px;
+  font-size: 25px;
+  font-weight: 900;
+  font-family: 'Silkscreen', sans-serif;
+}
+
+/* Íconos del toggle */
+.music-toggle .toggle-icon {
+  transition: opacity 0.3s ease;
+}
+
+/* Por defecto, mostrar el ícono "on" y ocultar el "off" */
+.music-toggle .toggle-icon.on {
+  display: inline;
+}
+.music-toggle .toggle-icon.off {
+  display: none;
+}
+
+/* Cuando el checkbox está marcado, invertir la visibilidad de los íconos */
+#musicToggle:checked + .music-toggle .toggle-icon.on {
+  display: none;
+}
+#musicToggle:checked + .music-toggle .toggle-icon.off {
+  display: inline;
+}
+
+/* Opcional: Cambiar estilos al activarse el toggle (checkbox marcado) */
+#musicToggle:checked + .music-toggle {
+  background: #ff5c5c;
+  border-color: magenta;
+  color: white;
+  box-shadow: 0 0.6em 0.6em -0.3em magenta;
+}
+
+@media (max-width: 550px) {
   .casita button,
-  .button-container button {
+  .button-container button,
+  .music-toggle {
     padding: 0.5em;
     font-size: 25px;
   }
@@ -160,9 +215,10 @@ header {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
   .casita button,
-  .button-container button {
+  .button-container button,
+  .music-toggle {
     padding: 0.5em;
     font-size: 15px;
   }

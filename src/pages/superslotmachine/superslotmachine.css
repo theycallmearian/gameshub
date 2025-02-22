@@ -2,9 +2,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-size: 1800px;
   color: var(--walterwhite);
-  margin: 0;
   padding: 0 var(--padding-s);
 }
 

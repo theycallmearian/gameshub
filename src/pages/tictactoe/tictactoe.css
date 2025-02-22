@@ -5,7 +5,6 @@ main {
   font-family: 'Silkscreen', sans-serif;
   height: auto;
   color: var(--walterwhite);
-  margin: 0;
 }
 
 #tic-tac-toe-container {

@@ -8,7 +8,7 @@ export const Header = (headerApp) => {
   const buttontic = document.createElement('button')
   const buttonHome = document.createElement('button')
 
-  // Títulos originales y emojis
+  // Títulos y emojis
   const titles = {
     simon: 'Simon',
     slot: 'Super Slot Machine',
@@ -19,60 +19,101 @@ export const Header = (headerApp) => {
   const emojis = {
     simon: '🚦',
     slot: '🎰',
-    tic: '📅',
+    tic: '❌',
     home: '🏠'
   }
 
-  // Configurar texto inicial
   buttonsimon.textContent = titles.simon
   buttonslot.textContent = titles.slot
   buttontic.textContent = titles.tic
   buttonHome.innerHTML = emojis.home
 
-  // Añadir eventos para los botones
-  buttonsimon.addEventListener('click', () => {
-    homeMusic.pause()
-    homeMusic.currentTime = 0
-    loadGame('simon')
+  // Función para manejar clics en los botones de juego
+  const handleGameClick = (game) => {
+    if (game !== 'tictactoe') {
+      if (window.homeMusic) {
+        window.homeMusic.pause()
+        window.homeMusic.currentTime = 0
+      }
+    } else {
+      // Para Tic Tac Toe, si la música está pausada y no está mute, se reproduce
+      if (window.homeMusic && window.homeMusic.paused && !window.isMuted) {
+        window.homeMusic.play().catch((error) => {
+          console.log('Error al reproducir homeMusic en Tic Tac Toe:', error)
+        })
+      }
+    }
+    loadGame(game)
+  }
+
+  // Asignar eventos a los botones de juego
+  const gameButtons = [
+    { button: buttonsimon, game: 'simon' },
+    { button: buttonslot, game: 'superslotmachine' },
+    { button: buttontic, game: 'tictactoe' }
+  ]
+
+  gameButtons.forEach(({ button, game }) => {
+    button.addEventListener('click', () => handleGameClick(game))
   })
-  buttonslot.addEventListener('click', () => {
-    homeMusic.pause()
-    homeMusic.currentTime = 0
-    loadGame('superslotmachine')
-  })
-  buttontic.addEventListener('click', () => {
-    homeMusic.pause()
-    homeMusic.currentTime = 0
-    loadGame('tictactoe')
-  })
+
+  // Evento para el botón Home
   buttonHome.addEventListener('click', () => {
     cleanupCurrentGame()
   })
 
-  // Crear un contenedor específico para la casita
+  // Contenedor para el botón Home (casita)
   const divCasita = document.createElement('div')
   divCasita.classList.add('casita')
   divCasita.appendChild(buttonHome)
 
-  // Crear el contenedor para los botones de los juegos
+  // Contenedor para los botones de juego
   const buttonContainer = document.createElement('div')
   buttonContainer.classList.add('button-container')
   buttonContainer.append(buttonsimon, buttonslot, buttontic)
 
-  header.append(divCasita, buttonContainer)
+  // --- Toggle de Música Personalizado ---
+  const musicToggleContainer = document.createElement('div')
+  musicToggleContainer.classList.add('music-toggle-container')
+
+  // Input checkbox oculto
+  const musicToggleInput = document.createElement('input')
+  musicToggleInput.type = 'checkbox'
+  musicToggleInput.id = 'musicToggle'
+
+  // Label que actuará como toggle
+  const musicToggleLabel = document.createElement('label')
+  musicToggleLabel.setAttribute('for', 'musicToggle')
+  musicToggleLabel.classList.add('music-toggle')
+  musicToggleLabel.innerHTML = `
+    <span class="toggle-icon on">&#128266;</span>
+    <span class="toggle-icon off">&#128263;</span>
+  `
+
+  musicToggleContainer.appendChild(musicToggleInput)
+  musicToggleContainer.appendChild(musicToggleLabel)
+  // --- Fin Toggle de Música ---
+
+  header.append(divCasita, buttonContainer, musicToggleContainer)
   headerApp.append(header)
 
-  // Añadir la música de la página principal
-  homeMusic = new Audio('sounds/home-music.mp3')
-  homeMusic.loop = true
-  homeMusic.volume = 0.1
+  // Aplicar estado de mute desde localStorage al cargar la página
+  const savedMuteState = localStorage.getItem('isMuted') === 'true'
+  window.isMuted = savedMuteState
+  if (window.homeMusic) {
+    window.homeMusic.muted = savedMuteState
+  }
+  musicToggleInput.checked = savedMuteState
 
-  // Reproducir la música de la página principal al cargar la página
-  document.addEventListener('DOMContentLoaded', () => {
-    homeMusic.play()
+  // Evento para el toggle de música
+  musicToggleInput.addEventListener('change', () => {
+    if (window.toggleAudio) {
+      window.toggleAudio()
+      musicToggleInput.checked = window.isMuted
+    }
   })
 
-  // Listener para cambiar texto a emojis según el tamaño de la pantalla
+  // Actualiza los títulos según el tamaño de la pantalla
   const updateButtonTitles = () => {
     if (window.innerWidth <= 1080) {
       buttonsimon.textContent = emojis.simon
@@ -84,18 +125,10 @@ export const Header = (headerApp) => {
       buttontic.textContent = titles.tic
     }
   }
-
-  // Escuchar cambios de tamaño en la ventana
   window.addEventListener('resize', updateButtonTitles)
-
-  // Llamar al inicio para ajustar según el tamaño actual
   updateButtonTitles()
 }
 
-// Declarar la música de la página principal para que esté disponible globalmente
-let homeMusic
-
-// Crear y exportar la función createMain que añade el contenedor principal del juego
 export const createMain = (mainApp) => {
   const main = document.createElement('main')
   const divApp = document.createElement('div')

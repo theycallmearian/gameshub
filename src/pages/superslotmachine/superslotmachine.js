@@ -77,7 +77,7 @@ export const bowserSound = new Audio('sounds/bowser.mp3')
 let isMusicMuted = false
 
 backgroundMusic.loop = true
-backgroundMusic.volume = 0.4
+backgroundMusic.volume = 0.3
 
 function playSoundWithMusicControl(sound) {
   if (!isMusicMuted) {

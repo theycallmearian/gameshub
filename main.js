@@ -43,13 +43,47 @@ const cssLinks = {
 let currentGame = null
 let currentCssLink = null
 
+// Instancia única de la música de home (BSO)
 let homeMusic = new Audio('sounds/home-music.mp3')
 homeMusic.loop = true
 homeMusic.volume = 0.1
 
+// Asignamos la instancia a nivel global para que esté disponible en header.js
+window.homeMusic = homeMusic
+
+// Obtener preferencia del usuario desde localStorage
+let isMuted = localStorage.getItem('isMuted') === 'true'
+window.isMuted = isMuted
+
+// Aplicar estado de mute desde la preferencia guardada
+homeMusic.muted = isMuted
+
+// Si el usuario tenía mute activado, la música no se reproduce automáticamente
+if (!isMuted) {
+  homeMusic.play().catch((error) => {
+    console.log(
+      'HomeMusic no pudo reproducirse de inicio (sin interacción):',
+      error
+    )
+  })
+}
+
+// Guardar el estado de mute en localStorage cuando se cambie
+const saveMutePreference = () => {
+  localStorage.setItem('isMuted', isMuted)
+}
+
 const loadGame = (game) => {
-  homeMusic.pause()
-  homeMusic.currentTime = 0
+  if (game === 'tictactoe') {
+    if (homeMusic.paused && !isMuted) {
+      homeMusic.play().catch((error) => {
+        console.log('Error al reproducir homeMusic para Tic Tac Toe:', error)
+      })
+    }
+  } else {
+    homeMusic.pause()
+    homeMusic.currentTime = 0
+  }
 
   if (currentGame && cleanupFunctions[currentGame]) {
     cleanupFunctions[currentGame]()
@@ -100,27 +134,35 @@ const cleanupCurrentGame = () => {
     mainTitle.style.display = 'block'
     subTitle.style.display = 'block'
 
-    homeMusic.play().catch((error) => {
-      console.log(
-        'Reproducción de música fallida debido a falta de interacción del usuario.'
-      )
-    })
+    if (!isMuted) {
+      homeMusic.play().catch((error) => {
+        console.log('Error al reanudar homeMusic:', error)
+      })
+    }
   }
 }
 
 window.loadGame = loadGame
 window.cleanupCurrentGame = cleanupCurrentGame
 
-document.addEventListener(
-  'click',
-  () => {
-    if (homeMusic.paused) {
-      homeMusic.play().catch((error) => {
-        console.log(
-          'No se pudo reproducir la música hasta que el usuario interactúe con la página.'
-        )
-      })
-    }
-  },
-  { once: true }
-)
+// Función global para alternar el estado de mute (llamada desde header.js)
+window.toggleAudio = function () {
+  isMuted = !isMuted
+  window.isMuted = isMuted
+
+  if (!isMuted && homeMusic.paused) {
+    homeMusic.play().catch((error) => {
+      console.log('Error al reanudar homeMusic al desmutear:', error)
+    })
+  } else if (isMuted) {
+    homeMusic.pause()
+  }
+
+  homeMusic.muted = isMuted
+  saveMutePreference()
+
+  const audioElements = document.querySelectorAll('audio')
+  audioElements.forEach((audio) => {
+    audio.muted = isMuted
+  })
+}
