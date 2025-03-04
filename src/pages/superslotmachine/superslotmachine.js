@@ -26,7 +26,7 @@ export const initSuperSlotMachine = (container) => {
   const musicCheckbox = document.getElementById('checkboxInput')
   if (musicCheckbox && !musicCheckbox.checked) {
     // Si el checkbox no está marcado (no está muteado), reproducir la música
-    backgroundMusic.play()
+    sounds.backgroundMusic.play()
     isMusicMuted = false
   } else {
     isMusicMuted = true
@@ -68,57 +68,55 @@ export const cleanupSuperSlotMachine = () => {
 }
 
 // ---- SOUNDS ----
-export const spinSound = new Audio('sounds/spin.mp3')
-export const winSound = new Audio('sounds/win.mp3')
-export const loseSound = new Audio('sounds/lose.mp3')
-export const backgroundMusic = new Audio('sounds/background-music.mp3')
-export const gameOverSound = new Audio('sounds/gameover.mp3')
-export const bowserSound = new Audio('sounds/bowser.mp3')
+export const sounds = {
+  spinSound: new Audio('sounds/spin.mp3'),
+  winSound: new Audio('sounds/win.mp3'),
+  loseSound: new Audio('sounds/lose.mp3'),
+  backgroundMusic: new Audio('sounds/background-music.mp3'),
+  gameOverSound: new Audio('sounds/gameover.mp3'),
+  bowserSound: new Audio('sounds/bowser.mp3')
+}
+
 let isMusicMuted = false
 
-backgroundMusic.loop = true
-backgroundMusic.volume = 0.3
+sounds.backgroundMusic.loop = true
+sounds.backgroundMusic.volume = 0.3
+
+// Ajustar volumen de los sonidos en un bucle
+Object.keys(sounds).forEach((soundKey) => {
+  if (soundKey !== 'backgroundMusic') {
+    sounds[soundKey].volume = 0.4
+  }
+})
 
 function playSoundWithMusicControl(sound) {
   if (!isMusicMuted) {
-    backgroundMusic.pause()
+    sounds.backgroundMusic.pause()
   }
   sound.play()
 
   sound.onended = () => {
     if (!isMusicMuted) {
-      backgroundMusic.play()
+      sounds.backgroundMusic.play()
     }
   }
 }
 
 function toggleBackgroundMusic() {
   if (isMusicMuted) {
-    backgroundMusic.play()
+    sounds.backgroundMusic.play()
     isMusicMuted = false
   } else {
-    backgroundMusic.pause()
+    sounds.backgroundMusic.pause()
     isMusicMuted = true
   }
 }
 
 function stopAllSounds() {
-  spinSound.pause()
-  spinSound.currentTime = 0
-
-  winSound.pause()
-  winSound.currentTime = 0
-
-  loseSound.pause()
-  loseSound.currentTime = 0
-
-  bowserSound.pause()
-  bowserSound.currentTime = 0
-
-  gameOverSound.pause()
-  gameOverSound.currentTime = 0
-  backgroundMusic.pause()
-  backgroundMusic.currentTime = 0
+  Object.values(sounds).forEach((sound) => {
+    sound.pause()
+    sound.currentTime = 0
+  })
 }
 
 // ---- COINS ----
@@ -244,7 +242,7 @@ function spinAll() {
   const reel3 = document.getElementById('reel3')
 
   stopAllSounds()
-  playSoundWithMusicControl(spinSound)
+  playSoundWithMusicControl(sounds.spinSound)
 
   const finalIndices = []
 
@@ -291,21 +289,21 @@ function spinAll() {
 }
 
 function checkWin(finalIndices) {
-  spinSound.pause()
-  spinSound.currentTime = 0
+  sounds.spinSound.pause()
+  sounds.spinSound.currentTime = 0
 
   const allBowsers = finalIndices.every((val) => val === 8)
 
   if (allBowsers) {
     decreaseCoins(30)
-    playSoundWithMusicControl(bowserSound)
+    playSoundWithMusicControl(sounds.bowserSound)
     displayMessage('🔥¡MUAJAJA! Pierdes 30 monedas.🔥')
   } else if (finalIndices.every((val) => val === finalIndices[0])) {
     increaseCoins(20)
-    playSoundWithMusicControl(winSound)
+    playSoundWithMusicControl(sounds.winSound)
     displayMessage('🪙¡Ganas 20 monedas!🪙')
   } else {
-    playSoundWithMusicControl(loseSound)
+    playSoundWithMusicControl(sounds.loseSound)
     displayMessage('😭¡OH NOOOO... Has perdido!😭')
   }
 
@@ -321,8 +319,8 @@ function resetGame() {
   document.getElementById('resetButton').style.display = 'none'
   toggleButton('spinAll', true)
 
-  gameOverSound.pause()
-  gameOverSound.currentTime = 0
+  sounds.gameOverSound.pause()
+  sounds.gameOverSound.currentTime = 0
 }
 
 function showGameOver() {
@@ -330,7 +328,7 @@ function showGameOver() {
   document.getElementById('resetButton').style.display = 'block'
   toggleButton('resetButton', true)
   toggleButton('spinAll', false)
-  playSoundWithMusicControl(gameOverSound)
+  playSoundWithMusicControl(sounds.gameOverSound)
 }
 
 function displayMessage(message) {

@@ -147,6 +147,12 @@
   font-size: 1.5em;
 }
 
+#game-result {
+  min-height: 2em;
+  text-align: center;
+  margin-top: var(--margin-l);
+}
+
 @media (max-width: 600px) {
   #simon-game {
     gap: 3vw;

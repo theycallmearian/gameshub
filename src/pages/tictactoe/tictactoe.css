@@ -12,6 +12,12 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: var(--padding-m);
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 0 14px 1px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('https://res.cloudinary.com/dye4qdrys/image/upload/e_improve,w_300,h_600,c_thumb,g_auto/v1741059340/pacman_b79vk4.gif');
 }
 
 #tictitle {
@@ -186,4 +192,10 @@ main {
 
 #reset-button:hover::before {
   transform: scale(1.5);
+}
+
+@media (max-width: 768px) {
+  #tic-tac-toe-container {
+    padding: var(--padding-s);
+  }
 }

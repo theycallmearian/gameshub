@@ -1,4 +1,8 @@
 import '/src/pages/simon/simon.css'
+import {
+  updateResultDisplay,
+  clearResultDisplay
+} from '../../components/Result/result.js'
 
 export const initSimon = (container) => {
   // Contenedor del juego
@@ -17,6 +21,7 @@ export const initSimon = (container) => {
       <p>Score: <span id="score">0</span></p>
       <p>High Score: <span id="high-score">0</span></p>
     </div>
+    <div id="game-result"></div>
   `
 
   container.appendChild(gameContainer)
@@ -50,6 +55,7 @@ export const initSimon = (container) => {
   // **Inicialización**
   disableColorButtons()
   loadHighScore()
+  clearResultDisplay() // Limpiar mensaje de resultado anterior
 
   // **Eventos**
   startButton.addEventListener('click', startGame)
@@ -67,6 +73,7 @@ export const initSimon = (container) => {
     level = 0
     score = 0
     updateScore()
+    clearResultDisplay() // Limpiar resultado al comenzar
 
     nextLevel()
   }
@@ -137,6 +144,7 @@ export const initSimon = (container) => {
     if (playerSequence.length === gameSequence.length) {
       score += level * 10
       updateScore()
+      updateResultDisplay(`✅ ¡Bien hecho! Nivel ${level} completado.`)
       setTimeout(nextLevel, 1000)
     }
   }
@@ -147,7 +155,7 @@ export const initSimon = (container) => {
     playSound('wrong')
     disableColorButtons()
 
-    alert(`¡Oh no! Has perdido. Puntuación final: ${score}`)
+    updateResultDisplay(`❌ ¡Has perdido! Puntuación final: ${score}.`)
   }
 
   function updateScore() {
@@ -190,4 +198,5 @@ export const initSimon = (container) => {
 export const cleanupSimon = () => {
   const container = document.getElementById('simon-game-container')
   if (container) container.remove()
+  clearResultDisplay()
 }
