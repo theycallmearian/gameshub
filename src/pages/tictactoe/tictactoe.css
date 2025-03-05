@@ -197,5 +197,22 @@ main {
 @media (max-width: 768px) {
   #tic-tac-toe-container {
     padding: var(--padding-s);
+    max-width: 80vw;
+  }
+  #tictitle {
+    font-size: 2em;
+    padding-bottom: var(--padding-s);
+    letter-spacing: 2px;
+  }
+
+  #tic-tac-toe-board {
+    grid-template-columns: repeat(3, 80px);
+  }
+  .cell {
+    width: 80px;
+    height: 80px;
+  }
+  #statistics {
+    padding: var(--margin-m);
   }
 }

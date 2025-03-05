@@ -150,7 +150,7 @@
 #game-result {
   min-height: 2em;
   text-align: center;
-  margin-top: var(--margin-l);
+  margin-top: var(--margin-m);
 }
 
 @media (max-width: 600px) {
