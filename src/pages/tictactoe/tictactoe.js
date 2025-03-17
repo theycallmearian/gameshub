@@ -19,7 +19,7 @@ export const initTicTacToe = (container) => {
   gameContainer.innerHTML = `
     <h1 id="tictitle">Tic Tac Toe</h1>
     <div id="ticsub-container">
-      <h3 id="ticsub">Pulsa una casilla para empezar</h3>
+      <h3 id="ticsub">Pulsa una casilla</h3>
     </div>
     <div id="tic-tac-toe-board">
         ${Array(9)
