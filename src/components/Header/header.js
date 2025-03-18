@@ -8,7 +8,6 @@ export const Header = (headerApp) => {
   const buttontic = document.createElement('button')
   const buttonHome = document.createElement('button')
 
-  // Títulos y emojis
   const titles = {
     simon: 'Simon',
     slot: 'Super Slot Machine',
@@ -28,7 +27,6 @@ export const Header = (headerApp) => {
   buttontic.textContent = titles.tic
   buttonHome.innerHTML = emojis.home
 
-  // Función para manejar clics en los botones de juego
   const handleGameClick = (game) => {
     if (game !== 'tictactoe') {
       if (window.homeMusic) {
@@ -36,7 +34,6 @@ export const Header = (headerApp) => {
         window.homeMusic.currentTime = 0
       }
     } else {
-      // Para Tic Tac Toe, si la música está pausada y no está mute, se reproduce
       if (window.homeMusic && window.homeMusic.paused && !window.isMuted) {
         window.homeMusic.play().catch((error) => {
           console.log('Error al reproducir homeMusic en Tic Tac Toe:', error)
@@ -46,7 +43,6 @@ export const Header = (headerApp) => {
     loadGame(game)
   }
 
-  // Asignar eventos a los botones de juego
   const gameButtons = [
     { button: buttonsimon, game: 'simon' },
     { button: buttonslot, game: 'superslotmachine' },
@@ -57,31 +53,25 @@ export const Header = (headerApp) => {
     button.addEventListener('click', () => handleGameClick(game))
   })
 
-  // Evento para el botón Home
   buttonHome.addEventListener('click', () => {
     cleanupCurrentGame()
   })
 
-  // Contenedor para el botón Home (casita)
   const divCasita = document.createElement('div')
   divCasita.classList.add('casita')
   divCasita.appendChild(buttonHome)
 
-  // Contenedor para los botones de juego
   const buttonContainer = document.createElement('div')
   buttonContainer.classList.add('button-container')
   buttonContainer.append(buttonsimon, buttonslot, buttontic)
 
-  // --- Toggle de Música Personalizado ---
   const musicToggleContainer = document.createElement('div')
   musicToggleContainer.classList.add('music-toggle-container')
 
-  // Input checkbox oculto
   const musicToggleInput = document.createElement('input')
   musicToggleInput.type = 'checkbox'
   musicToggleInput.id = 'musicToggle'
 
-  // Label que actuará como toggle
   const musicToggleLabel = document.createElement('label')
   musicToggleLabel.setAttribute('for', 'musicToggle')
   musicToggleLabel.classList.add('music-toggle')
@@ -92,12 +82,10 @@ export const Header = (headerApp) => {
 
   musicToggleContainer.appendChild(musicToggleInput)
   musicToggleContainer.appendChild(musicToggleLabel)
-  // --- Fin Toggle de Música ---
 
   header.append(divCasita, buttonContainer, musicToggleContainer)
   headerApp.append(header)
 
-  // Aplicar estado de mute desde localStorage al cargar la página
   const savedMuteState = localStorage.getItem('isMuted') === 'true'
   window.isMuted = savedMuteState
   if (window.homeMusic) {
@@ -105,7 +93,6 @@ export const Header = (headerApp) => {
   }
   musicToggleInput.checked = savedMuteState
 
-  // Evento para el toggle de música
   musicToggleInput.addEventListener('change', () => {
     if (window.toggleAudio) {
       window.toggleAudio()
@@ -113,7 +100,6 @@ export const Header = (headerApp) => {
     }
   })
 
-  // Actualiza los títulos según el tamaño de la pantalla
   const updateButtonTitles = () => {
     if (window.innerWidth <= 1080) {
       buttonsimon.textContent = emojis.simon

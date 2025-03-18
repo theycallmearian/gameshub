@@ -1,14 +1,11 @@
 import './style.css'
 import { Header, createMain } from './src/components/Header/header.js'
-import { initSimon, cleanupSimon } from './src/pages/simon/simon.js'
-import {
-  initTicTacToe,
-  cleanupTicTacToe
-} from './src/pages/tictactoe/tictactoe.js'
+import { initSimon, cleanupSimon } from './src/pages/simon/index.js'
+import { initTicTacToe, cleanupTicTacToe } from './src/pages/tictactoe/index.js'
 import {
   initSuperSlotMachine,
   cleanupSuperSlotMachine
-} from './src/pages/superslotmachine/superslotmachine.js'
+} from './src/pages/superslotmachine/index.js'
 
 const headerApp = document.querySelector('body')
 Header(headerApp)
@@ -43,22 +40,17 @@ const cssLinks = {
 let currentGame = null
 let currentCssLink = null
 
-// Instancia única de la música de home (BSO)
 let homeMusic = new Audio('sounds/home-music.mp3')
 homeMusic.loop = true
 homeMusic.volume = 0.1
 
-// Asignamos la instancia a nivel global para que esté disponible en header.js
 window.homeMusic = homeMusic
 
-// Obtener preferencia del usuario desde localStorage
 let isMuted = localStorage.getItem('isMuted') === 'true'
 window.isMuted = isMuted
 
-// Aplicar estado de mute desde la preferencia guardada
 homeMusic.muted = isMuted
 
-// Si el usuario tenía mute activado, la música no se reproduce automáticamente
 if (!isMuted) {
   homeMusic.play().catch((error) => {
     console.log(
@@ -68,7 +60,6 @@ if (!isMuted) {
   })
 }
 
-// Guardar el estado de mute en localStorage cuando se cambie
 const saveMutePreference = () => {
   localStorage.setItem('isMuted', isMuted)
 }
@@ -145,7 +136,6 @@ const cleanupCurrentGame = () => {
 window.loadGame = loadGame
 window.cleanupCurrentGame = cleanupCurrentGame
 
-// Función global para alternar el estado de mute (llamada desde header.js)
 window.toggleAudio = function () {
   isMuted = !isMuted
   window.isMuted = isMuted

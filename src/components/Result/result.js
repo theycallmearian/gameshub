@@ -5,7 +5,6 @@ export const createResultDisplay = () => {
     resultContainer = document.createElement('div')
     resultContainer.id = 'game-result'
 
-    // Agregamos al contenedor principal del juego
     const appDiv = document.getElementById('app')
     if (appDiv) {
       appDiv.appendChild(resultContainer)
